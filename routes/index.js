@@ -9,4 +9,6 @@ router.get('/products', indexController.getProducts);
 
 router.post('/new-product', indexController.addProduct);
 
+router.post("/webhook1", indexController.reClientype);
+
 module.exports = router;
