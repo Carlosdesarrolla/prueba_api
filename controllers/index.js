@@ -29,9 +29,21 @@ const addProduct = (req, res,nex) => {
 
 	res.redirect('/products');
 };
+const reClientype = (req, res) => {
+    const body = req.body; // receives {"id": "1", "message": "hello"}
+	console.log("carlos"+ JSON.stringify(body));
+	console.log("respuesta"+ JSON.stringify(req.headers));
+	
+    return res.status(200).send(body+" he recibido con exito. ");
+
+};
+
+
+
 
 module.exports = {
   index,
   getProducts,
-  addProduct
+  addProduct,
+  reClientype
 };
