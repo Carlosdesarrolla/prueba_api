@@ -3,6 +3,7 @@ var items = [
 	{id: 2, name: 'product2'},
 	{id: 3, name: 'product3'}
 ];
+var items_recibidos = [{}];
 
 const index = (req, res, next) => {
 	res.render('index', {
@@ -29,21 +30,26 @@ const addProduct = (req, res,nex) => {
 
 	res.redirect('/products');
 };
-const reClientype = (req, res) => {
-    const body = req.body; // receives {"id": "1", "message": "hello"}
-	console.log("carlos"+ JSON.stringify(body));
-	console.log("respuesta"+ JSON.stringify(req.headers));
-	
-    return res.status(200).send(body+" he recibido con exito. ");
-
+const proClientype = (req, res,nex) => {
+    const body = req.body;
+	items_recibidos.push({
+		id: items_recibidos.length + 1,
+		cliente: JSON.stringify(body),
+		cabecera : JSON.stringify(req.headers)
+	});
+	res.redirect('/webhook1');
 };
-
-
-
+const reClientype = (req, res, next) => {
+	res.render('webhook1', {
+		title: 'DigitalApium clientes modificados',
+		items_recibidos:items_recibidos
+	});
+};
 
 module.exports = {
   index,
   getProducts,
   addProduct,
-  reClientype
+  reClientype,
+  proClientype
 };
